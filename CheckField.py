@@ -1,5 +1,5 @@
-from main import SIZE
 import numpy as np
+SIZE = 9
 
 
 class CheckField:
@@ -21,6 +21,3 @@ class CheckField:
                 if len(set(np.array(self.field)[i:i + 3, j:j + 3].reshape(9))) != SIZE:
                     return False
         return True
-
-    def response(self):
-        return self.check_line() * self.check_square()

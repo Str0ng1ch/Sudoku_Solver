@@ -1,4 +1,4 @@
-# from CheckField import CheckField
+from CheckField import CheckField
 from SolveField import SolveField
 
 SIZE = 9
@@ -14,10 +14,9 @@ sudoku = [[0, 0, 7, 1, 2, 0, 5, 0, 8],
 
 
 def main():
-    # checker = CheckField(all_field)
+    checker = CheckField(sudoku)
+    print(checker.check)
     # SolveField(sudoku)
-    print(set([1, 2, 3, [4], 5]))
-    # print(checker.response())
     # solver.print_field()
 
 

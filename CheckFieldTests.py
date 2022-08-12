@@ -6,7 +6,7 @@ with open('CheckFieldExamples.json', 'r') as filehandle:
     test_examples = json.load(filehandle)
 
 
-class Test_check_field(unittest.TestCase):
+class CheckFieldTests(unittest.TestCase):
     def test1(self):
         self.assertTrue(CheckField(test_examples['example1']).check())
 

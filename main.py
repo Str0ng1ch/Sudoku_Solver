@@ -26,7 +26,6 @@ def main():
     else:
         print('Too hard for me now')
         print_field(solver.field)
-        graphics_main(solver.field)
 
 
 if __name__ == "__main__":

@@ -20,5 +20,5 @@ class CheckField:
 
     def check_square(self, i):
         return False if i % 3 != 0 else (list(len({item for item in list(np.array(self.field, dtype=object)
-                                        [i // 3 * 3:i // 3 * 3 + 3, j:j + 3].reshape(9)) if len(str(item)) == 1})
-                                        for j in range(0, 3)) != [SIZE, SIZE, SIZE])
+                                        [i // 3 * 3:i // 3 * 3 + 3, j * 3:j * 3 + 3].reshape(9))
+                                        if len(str(item)) == 1}) for j in range(0, 3)) != [SIZE, SIZE, SIZE])

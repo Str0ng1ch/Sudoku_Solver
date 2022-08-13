@@ -14,13 +14,13 @@ class SolveField:
         while True:
             current_field = self.copy()
             self.transposed_field = np.array(self.field, dtype=object).T
-            self.field = self.solve_one_step(self.copy())
+            self.field = self.last_possible(self.copy())
             if current_field == self.field:
                 if CheckField(self.field).check:
                     return True
                 return False
 
-    def solve_one_step(self, field):
+    def last_possible(self, field):
         for i in range(SIZE):
             for j in range(SIZE):
                 if not (len(str(field[i][j])) == 1 and field[i][j] != 0):

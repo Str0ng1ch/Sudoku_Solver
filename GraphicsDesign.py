@@ -20,9 +20,9 @@ def draw_numbers(field):
     for i in range(9):
         y_cords = SCREEN_SIZE // 9 * i
         for j in range(9):
-            x_cords = SCREEN_SIZE // 9 * j + SCREEN_SIZE // 18 - FONT_SIZE // 3.2
+            x_cords = SCREEN_SIZE // 9 * j + SCREEN_SIZE // 18 - FONT_SIZE // 3.3
             if field[i][j] == 1:
-                x_cords += FONT_SIZE // 12.8
+                x_cords += FONT_SIZE // 3.3 // 4
             text = font.render(str(field[i][j]), False, LINE_COLOR)
             screen.blit(text, (x_cords, y_cords))
 

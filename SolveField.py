@@ -7,7 +7,9 @@ SIZE = 9
 class SolveField:
     def __init__(self, field):
         self.field = field
+        self.start_field = self.copy()
         self.max_set = {i + 1 for i in range(SIZE)}
+        self.step_by_step = []
         self.solve()
 
     def solve(self):
@@ -29,7 +31,9 @@ class SolveField:
                                        {item for item in list(np.array(self.field, dtype=object)
                                         [i // 3 * 3:i // 3 * 3 + 3, j // 3 * 3:j // 3 * 3 + 3].reshape(9))
                                         if len(str(item)) == 1})
-                    if len(field[i][j]) == 1: field[i][j] = field[i][j][0]
+                    if len(field[i][j]) == 1:
+                        field[i][j] = field[i][j][0]
+                        self.step_by_step.append((field[i][j], i, j))
         return field
 
     def copy(self):

@@ -6,7 +6,7 @@ SIZE = 9
 class CheckField:
     def __init__(self, field):
         self.field = field
-        self.transposed_field = np.array(field, dtype=object).T
+        self.transposed_field = np.array(self.field, dtype=object).T
 
     def check(self):
         for i in range(SIZE):
@@ -20,5 +20,9 @@ class CheckField:
 
     def check_square(self, i):
         return False if i % 3 != 0 else (list(len({item for item in list(np.array(self.field, dtype=object)
-                                        [i // 3 * 3:i // 3 * 3 + 3, j * 3:j * 3 + 3].reshape(9))
-                                        if len(str(item)) == 1}) for j in range(0, 3)) != [SIZE, SIZE, SIZE])
+                                                                         [i // 3 * 3:i // 3 * 3 + 3,
+                                                                         j * 3:j * 3 + 3].reshape(9))
+                                                   if len(str(item)) == 1}) for j in range(0, 3)) != [SIZE, SIZE, SIZE])
+
+
+check = CheckField([1])

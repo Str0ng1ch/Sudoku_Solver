@@ -9,15 +9,14 @@ def print_field(field):
 
 
 def main():
-    solver = SolveField(sudoku.copy())
+    solver = SolveField(sudoku)
     if solver.solve():
         print_field(solver.field)
         graphics_main(solver.field)
     else:
-        print(sudoku)
+        print_field(solver.field)
         print('Too hard for me now')
         graphics_main(solver.field)
-        print_field(solver.field)
 
 
 if __name__ == "__main__":

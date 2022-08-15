@@ -11,10 +11,14 @@ with open('SolveFieldAnswers.json', 'r') as filehandle:
 
 class SolveFieldTests(unittest.TestCase):
     def test1(self):
-        self.assertEqual(SolveField(tests['example1']).field, answers['example1'])
+        solver = SolveField(tests['example1'])
+        solver.solve()
+        self.assertEqual(solver.field, answers['example1'])
 
     def test2(self):
-        self.assertEqual(SolveField(tests['example2']).field, answers['example2'])
+        solver = SolveField(tests['example2'])
+        solver.solve()
+        self.assertEqual(solver.field, answers['example2'])
 
 
 if __name__ == "__main__":

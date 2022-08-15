@@ -76,7 +76,9 @@ def graphics_main(field):
                     cords = ([(arr[i][1], arr[i][2]) for i in range(current)])
                 elif rect_step_by_step.collidepoint(pygame.mouse.get_pos()) and not flag:
                     field = sudoku
-                    arr = SolveField(field).step_by_step
+                    solver = SolveField(field)
+                    solver.solve()
+                    arr = solver.step_by_step
                     flag = True
             draw_lines(9, GRAY, GRAY_LINE_WIDTH)
             draw_lines(3, BLACK, BLACK_LINE_WIDTH)

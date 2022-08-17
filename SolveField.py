@@ -14,6 +14,7 @@ class SolveField:
         while True:
             current_field = self.copy()
             self.field = self.last_possible(self.copy())
+            self.field = self.non_rubber(self.copy())
             self.field = self.last_hero(self.copy())
             if current_field == self.field:
                 if CheckField(self.field).check():
@@ -77,6 +78,32 @@ class SolveField:
                     self.step_by_step.append((x + 1, i + index[0] // 3, j + index[0] % 3))
         return field
 
+    def function(self, field, index, i, j, x, count):
+        if index[0] // 3 == index[1] // 3 == index[2 if count == 3 else 1] // 3:
+            for item in range(len(field[i + index[0] // 3])):
+                if len(str(field[i + index[0] // 3][item])) > 1 and x + 1 in field[i + index[0] // 3][item] and item != j + index[0] % 3 and item != j + index[1] % 3 and item != j + index[2 if count == 3 else 1] % 3:
+                    field[i + index[0] // 3][item].remove(x + 1)
+
+    def non_rubber(self, field):
+        for i in range(SIZE):
+            for j in range(SIZE):
+                if i % 3 == 0 and j % 3 == 0:
+                    for x in range(SIZE):
+                        count, index = self.count_number(list(np.array(field, dtype=object)
+                                                              [i // 3 * 3:i // 3 * 3 + 3,
+                                                              j // 3 * 3:j // 3 * 3 + 3].reshape(9)), x + 1)
+                        if 2 <= count <= 3:
+                            self.function(field, index, i, j, x, count)
+                            if index[0] % 3 == index[1] % 3 == index[2 if count == 3 else 1] % 3:
+                                field = self.transposing(field)
+                                for item in range(len(field[j + index[0] % 3])):
+                                    if (len(str(field[j + index[0] % 3][item])) > 1 and x + 1 in
+                                            field[j + index[0] % 3][item] and item != i + index[0] // 3 and item != i +
+                                            index[1] // 3 and item != i + index[2 if count == 3 else 1] // 3):
+                                        field[j + index[0] % 3][item].remove(x + 1)
+                                field = self.transposing(field)
+        return field
+
     def copy(self):
         return [[self.field[i][j] for j in range(SIZE)] for i in range(SIZE)]
 
@@ -89,6 +116,5 @@ class SolveField:
         for i in range(SIZE):
             for j in range(SIZE):
                 if (j, i) not in arr:
-                    arr.append((i, j))
-                    field[i][j], field[j][i] = field[j][i], field[i][j]
+                    field[i][j], field[j][i], arr = field[j][i], field[i][j], arr + [(i, j)]
         return field

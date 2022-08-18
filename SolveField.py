@@ -14,7 +14,9 @@ class SolveField:
         while True:
             current_field = self.copy()
             self.field = self.last_possible(self.copy())
-            self.field = self.non_rubber(self.copy())
+            self.field = self.transposing(self.non_rubber_line(self.transposing(self.copy())))
+            self.field = self.non_rubber_line(self.copy())
+            self.field = self.non_rubber_square(self.copy())
             self.field = self.last_hero(self.copy())
             if current_field == self.field:
                 if CheckField(self.field).check():
@@ -84,7 +86,7 @@ class SolveField:
                 if len(str(field[i + index[0] // 3][item])) > 1 and x + 1 in field[i + index[0] // 3][item] and item != j + index[0] % 3 and item != j + index[1] % 3 and item != j + index[2 if count == 3 else 1] % 3:
                     field[i + index[0] // 3][item].remove(x + 1)
 
-    def non_rubber(self, field):
+    def non_rubber_square(self, field):
         for i in range(SIZE):
             for j in range(SIZE):
                 if i % 3 == 0 and j % 3 == 0:
@@ -102,6 +104,19 @@ class SolveField:
                                             index[1] // 3 and item != i + index[2 if count == 3 else 1] // 3):
                                         field[j + index[0] % 3][item].remove(x + 1)
                                 field = self.transposing(field)
+        return field
+
+    def non_rubber_line(self, field):
+        for i in range(SIZE):
+            for j in range(SIZE):
+                count, index = self.count_number(field[i], j + 1)
+                if 2 <= count <= 3:
+                    if index[0] // 3 == index[1] // 3 == index[-1] // 3:
+                        square = list(np.array(field, dtype=object)
+                                [i // 3 * 3:i // 3 * 3 + 3, index[0] // 3 * 3:index[0] // 3 * 3 + 3].reshape(9))
+                        for x in range(SIZE):
+                            if len(str(square[x])) > 1 and j + 1 in square[x] and not (i % 3 * 3 <= x < i % 3 * 3 + 3):
+                                field[i // 3 * 3 + x // 3][index[0] // 3 * 3 + x % 3].remove(j + 1)
         return field
 
     def copy(self):

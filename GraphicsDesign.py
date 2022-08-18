@@ -17,6 +17,10 @@ rect_forward = pygame.draw.rect(screen, GRAY, (422, 650, 161, 50))
 current, cords = 0, [(-1, -1)]
 
 
+class Cage:
+    pass
+
+
 def draw_lines(number, color, width):
     for i in range(SCREEN_WIDTH // number, SCREEN_WIDTH + 1, SCREEN_WIDTH // number):
         pygame.draw.line(screen, color, (0, i), (SCREEN_WIDTH, i), width)
